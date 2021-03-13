@@ -110,6 +110,11 @@ function draw() {
     imageMode(CENTER);
     image(polygonimg ,ball.position.x,ball.position.y,40,40);
    slingShot.display();
+
+   textSize(20);
+   noStroke();
+   fill(255,255,255);
+   text("Press Space to get another chance to play!", 500,350)
 }
 
 function mouseDragged() {
