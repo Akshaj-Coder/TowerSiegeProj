@@ -19,4 +19,4 @@ class Ground{
         fill(188,67,67);
         rect(0,0,this.width,this.height);
     }
-}
+}   

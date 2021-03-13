@@ -18,8 +18,14 @@ var ball;
 
 var polygonimg;
 
+var backgroundImage;
+
 function preload(){
+    getBackgroundImg();
+
     polygonimg = loadImage("polygon.png");
+
+    backgroundImage = loadImage("bg.jpg");
 }
 
 function setup() {
@@ -68,13 +74,13 @@ function setup() {
    
 
     slingShot = new Slingshot(this.ball,{x:100,y:200});
-
+   
 }
 
 
 function draw() {
     //Engine.update(engine);
-    background(52,0,0);
+    background(backgroundImage);
 
     //ground.display();
     stand1.display();
@@ -115,6 +121,8 @@ function draw() {
    noStroke();
    fill(255,255,255);
    text("Press Space to get another chance to play!", 500,350)
+
+  
 }
 
 function mouseDragged() {
@@ -129,4 +137,23 @@ function keyPressed() {
 if (keyCode == 32) {
     slingShot.attach(ball);
 }
+}
+
+async function getBackgroundImg() {
+    var response = await fetch("https://worldtimeapi.org/api/timezone/Asia/Kolkata");
+    var responseJSON = await response.json();
+    console.log(responseJSON);
+
+    var datetime = responseJSON.datetime;
+    var hour = datetime.slice(11,13);
+
+    if (hour>=0600 && hour<=1900) {
+        bg = "daybackground.jpg";
+    }
+
+    else {
+        bg = "nightbackground.jpg";
+    }
+
+    backgroundImage = loadImage(bg);
 }
